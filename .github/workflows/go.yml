@@ -10,9 +10,6 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./sorting-service
     steps:
     - uses: actions/checkout@v2
     
@@ -29,11 +26,11 @@ jobs:
         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
         restore-keys: |
             ${{ runner.os }}-go-
-    - name: Build
-      run: go build -v ./...
 
-    - name: Test
-      run: go test -cover -v -race ./...
+    - name: Test sorting-service
+      run: cd sorting-service && go test -cover -v -race ./...
+    
+    - name: Test fulfillment-service
+      run: cd fulfillment-service && go test -cover -v -race ./...
 
-    - name: Clear
-      run: rm sorting-service
+
