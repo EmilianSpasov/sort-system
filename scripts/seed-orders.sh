@@ -1,7 +1,7 @@
 #!/bin/bash
 
 items_1='[{"code": "123", "label": "tomato"},{"code": "456", "label": "cucumber"}]'
-items_2='[{"code": "420", "label": "glass"},{"code": "222", "label": "fork"},{"code": "123", "label": "tomato"}]'
+items_2='[{"code": "420", "label": "glass"},{"code": "222", "label": "fork"}]'
 items_3='[{"code": "111", "label": "english breakfast"},{"code": "333", "label": "beans in a can"}]'
 items_4='[{"code": "666", "label": "peaches"},{"code": "667", "label": "oranges"}]'
 items_5='[{"code": "501", "label": "headphones"},{"code": "502", "label": "keyboard"},{"code": "503", "label": "cat in a box"}]'
@@ -26,4 +26,4 @@ grpcurl \
     -d "{\"orders\":[{\"id\":\"1\", \"items\":$items_1},{\"id\":\"2\", \"items\":$items_2},{\"id\":\"3\", \"items\":$items_3},{\"id\":\"4\", \"items\":$items_4},{\"id\":\"5\", \"items\":$items_5},{\"id\":\"6\", \"items\":$items_6},{\"id\":\"7\", \"items\":$items_7},{\"id\":\"8\", \"items\":$items_8},{\"id\":\"9\", \"items\":$items_9},{\"id\":\"10\", \"items\":$items_10}]}" \
     -plaintext localhost:10001 fulfillment.Fulfillment.LoadOrders
 
-#grpcurl -d "{}" -plaintext localhost:10001 fulfillment.Fulfillment.ExecuteOrders
+grpcurl -d "{}" -plaintext localhost:10001 fulfillment.Fulfillment.GetAllOrdersFulfillmentStatus > orders_statuses.json

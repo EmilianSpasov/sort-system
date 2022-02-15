@@ -8,6 +8,31 @@ import "types.proto";
 service Fulfillment {
     // Sync implementation
     rpc LoadOrders(LoadOrdersRequest) returns (CompleteResponse);
+    rpc GetOrderFulfillmentStatusById(OrderIdRequest) returns (OrdersStatusResponse);
+    rpc GetAllOrdersFulfillmentStatus(types.Empty) returns (OrdersStatusResponse);
+    rpc MarkFulfilled(OrderIdRequest) returns (types.Empty);
+    //rpc ProcessOrders(types.Empty) returns (types.Empty);
+
+}
+
+enum OrderStatus {
+    PENDING = 0;
+    READY = 1;
+    FAILED = 2;
+}
+
+message FulfillmentStatus {
+    types.Cubby cubby = 1;
+    types.Order order = 2;
+    OrderStatus status = 3;
+}
+
+message OrderIdRequest {
+    string orderId = 1;
+}
+
+message OrdersStatusResponse {
+    repeated FulfillmentStatus fulfillmentStatus = 1;
 }
 
 message PreparedOrder {
