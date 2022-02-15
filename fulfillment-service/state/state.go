@@ -120,8 +120,13 @@ func (sm *state) GetOrderDataById(orderId string) (OrderData, error) {
 	sm.mu.RLock()
 	defer sm.mu.RUnlock()
 
-	if !sm.doesOrderWithIdExist(orderId) {
-		return OrderData{}, fmt.Errorf("no order with such id: " + orderId)
+	doesExist := sm.doesOrderWithIdExist(orderId)
+	if order, err := sm.searchInHistory(orderId); !doesExist {
+		if err != nil {
+			return OrderData{}, fmt.Errorf("no order with such id: " + orderId)
+		}
+
+		return order, nil
 	}
 
 	status, err := sm.getOrderStatus(orderId)
@@ -132,6 +137,16 @@ func (sm *state) GetOrderDataById(orderId string) (OrderData, error) {
 	data := sm.orderIdToData[orderId]
 	data.Status = status
 	return *data, nil
+}
+
+func (sm *state) searchInHistory(orderId string) (OrderData, error) {
+	for _, order := range sm.history {
+		if order.Id == orderId {
+			return order, nil
+		}
+	}
+
+	return OrderData{}, fmt.Errorf("no order with such id: " + orderId)
 }
 
 func (sm *state) GetAllOrdersData() ([]OrderData, error) {

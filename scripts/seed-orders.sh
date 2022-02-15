@@ -27,3 +27,4 @@ grpcurl \
     -plaintext localhost:10001 fulfillment.Fulfillment.LoadOrders
 
 grpcurl -d "{}" -plaintext localhost:10001 fulfillment.Fulfillment.GetAllOrdersFulfillmentStatus > orders_statuses.json
+grpcurl -d "{\"orderId\":\"1\"}" -plaintext localhost:10001 fulfillment.Fulfillment.GetOrderFulfillmentStatusById
