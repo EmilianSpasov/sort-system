@@ -5,7 +5,6 @@ import (
 	"sync"
 
 	"github.com/Emoto13/sort-system/gen"
-	"github.com/preslavmihaylov/ordertocubby"
 )
 
 type State interface {
@@ -50,14 +49,14 @@ func (sm *state) doesOrderWithIdExist(orderId string) bool {
 }
 
 func (sm *state) getCubbyIdByOrderId(orderId string, times int) string {
-	cubbyId := ordertocubby.Map(orderId, uint32(times), 10)
+	cubbyId := MapOrderToCubby(orderId, uint32(times), 10)
 	attemptsToAvoidCollision := 1
 	for true {
 		if _, ok := sm.cubbyIdToOrderId[cubbyId]; !ok {
 			break
 		}
 
-		cubbyId = ordertocubby.Map(orderId, uint32(times+attemptsToAvoidCollision), 10)
+		cubbyId = MapOrderToCubby(orderId, uint32(times+attemptsToAvoidCollision), 10)
 		attemptsToAvoidCollision++
 	}
 	return cubbyId
