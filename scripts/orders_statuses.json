@@ -2,18 +2,64 @@
   "fulfillmentStatus": [
     {
       "cubby": {
-        "id": "4"
+        "id": "2"
       },
       "order": {
-        "id": "7",
+        "id": "2",
         "items": [
           {
-            "code": "401",
-            "label": "water bottle"
+            "code": "420",
+            "label": "glass"
           },
           {
-            "code": "402",
-            "label": "wataaa"
+            "code": "222",
+            "label": "fork"
+          }
+        ]
+      },
+      "status": "READY"
+    },
+    {
+      "cubby": {
+        "id": "10"
+      },
+      "order": {
+        "id": "6",
+        "items": [
+          {
+            "code": "601",
+            "label": "book 1"
+          },
+          {
+            "code": "602",
+            "label": "book 2"
+          },
+          {
+            "code": "603",
+            "label": "book 3"
+          },
+          {
+            "code": "604",
+            "label": "book 4"
+          }
+        ]
+      },
+      "status": "READY"
+    },
+    {
+      "cubby": {
+        "id": "9"
+      },
+      "order": {
+        "id": "10",
+        "items": [
+          {
+            "code": "101",
+            "label": "laptop"
+          },
+          {
+            "code": "102",
+            "label": "mouse"
           }
         ]
       },
@@ -64,25 +110,6 @@
           {
             "code": "456",
             "label": "cucumber"
-          }
-        ]
-      },
-      "status": "READY"
-    },
-    {
-      "cubby": {
-        "id": "2"
-      },
-      "order": {
-        "id": "2",
-        "items": [
-          {
-            "code": "420",
-            "label": "glass"
-          },
-          {
-            "code": "222",
-            "label": "fork"
           }
         ]
       },
@@ -151,45 +178,18 @@
     },
     {
       "cubby": {
-        "id": "10"
+        "id": "4"
       },
       "order": {
-        "id": "6",
+        "id": "7",
         "items": [
           {
-            "code": "601",
-            "label": "book 1"
+            "code": "401",
+            "label": "water bottle"
           },
           {
-            "code": "602",
-            "label": "book 2"
-          },
-          {
-            "code": "603",
-            "label": "book 3"
-          },
-          {
-            "code": "604",
-            "label": "book 4"
-          }
-        ]
-      },
-      "status": "READY"
-    },
-    {
-      "cubby": {
-        "id": "9"
-      },
-      "order": {
-        "id": "10",
-        "items": [
-          {
-            "code": "101",
-            "label": "laptop"
-          },
-          {
-            "code": "102",
-            "label": "mouse"
+            "code": "402",
+            "label": "wataaa"
           }
         ]
       },

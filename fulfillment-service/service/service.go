@@ -8,6 +8,7 @@ import (
 
 	"github.com/Emoto13/sort-system/fulfillment-service/state"
 	"github.com/Emoto13/sort-system/gen"
+	"go.uber.org/atomic"
 )
 
 type FulfillmentService interface {
@@ -19,7 +20,7 @@ type fulfillmentService struct {
 	sortingRobot     gen.SortingRobotClient
 	state            state.State
 	orders           chan []*gen.Order
-	processingOrders bool
+	processingOrders *atomic.Bool
 	mu               sync.Mutex
 }
 
@@ -28,17 +29,17 @@ func New(params *FulfillmentServiceParameters) FulfillmentService {
 		sortingRobot:     params.SortingRobot,
 		state:            params.State,
 		orders:           params.Orders,
-		processingOrders: false,
+		processingOrders: atomic.NewBool(false),
 		mu:               sync.Mutex{},
 	}
 }
 
 func (fs *fulfillmentService) areOrdersBeingProcessed() bool {
-	return fs.processingOrders
+	return fs.processingOrders.Load()
 }
 
 func (fs *fulfillmentService) setAreOrdersBeingProcessed(value bool) {
-	fs.processingOrders = value
+	fs.processingOrders.Store(value)
 }
 
 func (fs *fulfillmentService) LoadOrders(ctx context.Context, in *gen.LoadOrdersRequest) (*gen.CompleteResponse, error) {
